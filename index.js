@@ -1,7 +1,7 @@
-// const scoresStr = '43|X|X|12|4/|42';
-const scoresStr = 'X|X|X|X|X|X|X|X|X|X';
+// var scoresStr = '43|X|X|12|4/|42';
+var scoresStr = 'X|X|X|X|X|X|X|X|X|X';
 
-const getFrameType = function(frameTries){
+var getFrameType = function(frameTries){
     if (isStrike(frameTries)) {
         return 'STRIKE';
     } else if (isSpare(frameTries)) {
@@ -11,11 +11,11 @@ const getFrameType = function(frameTries){
     }
 }
 
-const isStrike = function(frame) {
+var isStrike = function(frame) {
     return frame && frame.includes('X')
 };
 
-const isSpare = function(frame) { 
+var isSpare = function(frame) { 
     return frame && frame.includes('/');
 };
 
@@ -36,13 +36,13 @@ function evalFrame(frameTries) {
 }
 
 
-const bowlingFrames = scoresStr.split('|');
+var bowlingFrames = scoresStr.split('|');
 let score = 0;
 for (let i = 0; i < bowlingFrames.length; i++) {
 
-    const frameTries = bowlingFrames[i].split('');
-    const evalFn = getScoreFn(frameTries);
-    const frameType = getFrameType(frameTries);
+    var frameTries = bowlingFrames[i].split('');
+    var evalFn = getScoreFn(frameTries);
+    var frameType = getFrameType(frameTries);
 
     if (frameType === 'STANDARD') {
         score += evalFn();
@@ -60,12 +60,12 @@ for (let i = 0; i < bowlingFrames.length; i++) {
     var accumulativeFns = [];
 
     if (frameType === 'SPARE') {
-        const tries = [nextFrameTries[0]];
+        var tries = [nextFrameTries[0]];
         accumulativeFns.push(getScoreFn(tries));
     } else {
         accumulativeFns.push(getScoreFn(nextFrameTries));
         if (isStrike(nextFrameTries) && !!bowlingFrames[i + 2]) {
-            const tries = [bowlingFrames[i + 2].split('')[0]];
+            var tries = [bowlingFrames[i + 2].split('')[0]];
             accumulativeFns.push(getScoreFn(tries));
         }
     }
